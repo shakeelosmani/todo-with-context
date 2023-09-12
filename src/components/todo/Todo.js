@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useCategoryContext } from "../../contexts/CategoryContext";
 import { TodoContext, useTodoContext } from "../../contexts/TodoContext";
+import ShortUniqueId from "short-unique-id";
 
 const Todo = () => {
   const category = useCategoryContext();
@@ -8,6 +9,8 @@ const Todo = () => {
   const [newTodo, setNewTodo] = useState("");
 
   const todoContext = useTodoContext(TodoContext);
+
+  const { randomUUID } = new ShortUniqueId({ length: 10 });
 
   const saveTodo = (e) => {
     e.preventDefault();
@@ -17,7 +20,7 @@ const Todo = () => {
     }
     todoContext.setTodos([
       ...todoContext.todos,
-      { todoName: newTodo, todoCategory: category },
+      { todoId: randomUUID(), todoName: newTodo, todoCategory: category },
     ]);
     setNewTodo("");
   };
