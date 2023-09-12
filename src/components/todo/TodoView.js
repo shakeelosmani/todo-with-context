@@ -5,6 +5,14 @@ import "react-tabs/style/react-tabs.css";
 const TodoView = () => {
   const { todos } = useTodoContext(TodoContext);
 
+  const todoCatMaker = (todos, cat) => {
+    return todos
+      .filter((todo) => todo.todoCategory == cat)
+      .map((perTodo, i) => {
+        return <li key={i}> {perTodo.todoName}</li>;
+      });
+  };
+
   return (
     <Tabs>
       <TabList>
@@ -13,23 +21,11 @@ const TodoView = () => {
       </TabList>
       <TabPanel>
         <h5>Personal Todos:</h5>
-        <ol>
-          {todos
-            .filter((todo) => todo.todoCategory == "per")
-            .map((perTodo, i) => {
-              return <li key={i}> {perTodo.todoName}</li>;
-            })}
-        </ol>
+        <ol>{todoCatMaker(todos, "per")}</ol>
       </TabPanel>
       <TabPanel>
         <h5>Work Todos:</h5>
-        <ol>
-          {todos
-            .filter((todo) => todo.todoCategory == "work")
-            .map((perTodo, i) => {
-              return <li key={i}> {perTodo.todoName}</li>;
-            })}
-        </ol>
+        <ol>{todoCatMaker(todos, "work")}</ol>
       </TabPanel>
     </Tabs>
   );
