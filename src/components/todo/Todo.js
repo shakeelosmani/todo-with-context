@@ -24,7 +24,7 @@ const Todo = () => {
 
   return (
     <>
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form className="actionForm" onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
           value={newTodo}
